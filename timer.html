@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,8 +8,8 @@
 
     <style>
       /* ================================
-   Basic Settings
-================================= */
+         Basic Settings
+      ================================= */
 
       * {
         box-sizing: border-box;
@@ -29,9 +28,16 @@
         --sub-text-color: #6e91a8;
       }
 
+      /* ================================
+         Body
+      ================================= */
+
       body {
         margin: 0;
+
+        width: 100vw;
         min-height: 100vh;
+
         display: flex;
         justify-content: center;
         align-items: center;
@@ -49,17 +55,19 @@
           #050a12;
 
         overflow: hidden;
+
         position: relative;
       }
 
       /* ================================
-   Tech Background Grid
-================================= */
+         Tech Background Grid
+      ================================= */
 
       body::before {
         content: "";
 
         position: fixed;
+
         inset: 0;
 
         background-image:
@@ -80,8 +88,8 @@
       }
 
       /* ================================
-   Background Glow
-================================= */
+         Background Glow
+      ================================= */
 
       body::after {
         content: "";
@@ -99,14 +107,13 @@
       }
 
       /* ================================
-   Main Container
-================================= */
+         Main Container
+      ================================= */
 
       .timer-container {
         position: relative;
 
-        width: 90%;
-        max-width: 620px;
+        width: min(90%, 620px);
 
         padding: 45px;
 
@@ -126,11 +133,15 @@
           inset 0 0 30px rgba(0, 140, 255, 0.04);
 
         overflow: hidden;
+
+        transition:
+          width 0.25s ease,
+          padding 0.25s ease;
       }
 
       /* ================================
-   Tech Decoration Lines
-================================= */
+         Top Decoration
+      ================================= */
 
       .timer-container::before {
         content: "";
@@ -153,25 +164,9 @@
         box-shadow: 0 0 10px var(--primary-color);
       }
 
-      .timer-container::after {
-        content: "";
-
-        position: absolute;
-
-        width: 80px;
-        height: 80px;
-
-        top: -40px;
-        right: -40px;
-
-        border: 1px solid rgba(0, 183, 255, 0.4);
-
-        transform: rotate(45deg);
-      }
-
       /* ================================
-   System Label
-================================= */
+         System Label
+      ================================= */
 
       .system-label {
         margin-bottom: 10px;
@@ -200,8 +195,8 @@
       }
 
       /* ================================
-   Input Section
-================================= */
+         Input Section
+      ================================= */
 
       .input-group {
         display: flex;
@@ -231,8 +226,6 @@
         border: 1px solid rgba(0, 183, 255, 0.3);
 
         outline: none;
-
-        transition: all 0.3s ease;
       }
 
       #timeInput::placeholder {
@@ -248,19 +241,15 @@
       }
 
       /* ================================
-   Convert Button
-================================= */
+         Convert Button
+      ================================= */
 
       .convert-btn {
         padding: 0 24px;
 
         border: 1px solid rgba(0, 183, 255, 0.5);
 
-        background: linear-gradient(
-          135deg,
-          rgba(0, 183, 255, 0.15),
-          rgba(0, 100, 200, 0.08)
-        );
+        background: rgba(0, 183, 255, 0.08);
 
         color: var(--primary-light);
 
@@ -269,8 +258,6 @@
         letter-spacing: 1px;
 
         cursor: pointer;
-
-        transition: all 0.3s ease;
       }
 
       .convert-btn:hover {
@@ -284,8 +271,8 @@
       }
 
       /* ================================
-   Timer
-================================= */
+         Timer
+      ================================= */
 
       .timer {
         position: relative;
@@ -305,39 +292,9 @@
         border-bottom: 1px solid rgba(0, 183, 255, 0.12);
       }
 
-      /* Corner Decorations */
-
-      .timer::before,
-      .timer::after {
-        content: "";
-
-        position: absolute;
-
-        width: 20px;
-        height: 20px;
-
-        border-color: var(--primary-color);
-
-        border-style: solid;
-      }
-
-      .timer::before {
-        top: 0;
-        left: 0;
-
-        border-width: 2px 0 0 2px;
-      }
-
-      .timer::after {
-        right: 0;
-        bottom: 0;
-
-        border-width: 0 2px 2px 0;
-      }
-
       /* ================================
-   Seconds Display
-================================= */
+         Seconds Display
+      ================================= */
 
       #secondsDisplay {
         font-family: "Courier New", monospace;
@@ -368,13 +325,11 @@
         letter-spacing: 5px;
 
         color: var(--sub-text-color);
-
-        text-transform: uppercase;
       }
 
       /* ================================
-   Control Buttons
-================================= */
+         Control Buttons
+      ================================= */
 
       .buttons {
         display: flex;
@@ -407,7 +362,9 @@
         transform: translateY(-2px);
       }
 
-      /* Start */
+      /* ================================
+         Start
+      ================================= */
 
       #startBtn {
         background: rgba(0, 255, 157, 0.08);
@@ -417,13 +374,9 @@
         color: var(--success-color);
       }
 
-      #startBtn:hover {
-        background: rgba(0, 255, 157, 0.15);
-
-        box-shadow: 0 0 18px rgba(0, 255, 157, 0.3);
-      }
-
-      /* Pause */
+      /* ================================
+         Pause
+      ================================= */
 
       #pauseBtn {
         background: rgba(255, 196, 0, 0.08);
@@ -433,13 +386,9 @@
         color: var(--warning-color);
       }
 
-      #pauseBtn:hover {
-        background: rgba(255, 196, 0, 0.15);
-
-        box-shadow: 0 0 18px rgba(255, 196, 0, 0.3);
-      }
-
-      /* Reset */
+      /* ================================
+         Reset
+      ================================= */
 
       #resetBtn {
         background: rgba(255, 56, 100, 0.08);
@@ -449,15 +398,9 @@
         color: var(--danger-color);
       }
 
-      #resetBtn:hover {
-        background: rgba(255, 56, 100, 0.15);
-
-        box-shadow: 0 0 18px rgba(255, 56, 100, 0.3);
-      }
-
       /* ================================
-   Message
-================================= */
+         Message
+      ================================= */
 
       #message {
         height: 24px;
@@ -469,13 +412,11 @@
         letter-spacing: 1px;
 
         color: var(--sub-text-color);
-
-        transition: color 0.3s ease;
       }
 
       /* ================================
-   Animated Scan Line
-================================= */
+         Scan Line
+      ================================= */
 
       .scan-line {
         position: absolute;
@@ -512,9 +453,133 @@
         }
       }
 
-      /* ================================
-   Mobile
-================================= */
+      /* ==================================================
+         MINI MODE
+         
+         當桌面 App 視窗寬度小於 420px
+         
+         隱藏：
+         - SYSTEM // COUNTDOWN
+         - Countdown Timer 標題
+         - 時間輸入
+         - Convert
+         - SECONDS
+         - Message
+      ================================================== */
+
+      @media (max-width: 420px) {
+        body {
+          min-height: 100vh;
+
+          align-items: center;
+
+          background: #050a12;
+        }
+
+        .timer-container {
+          width: 100%;
+          max-width: none;
+
+          padding: 12px;
+
+          border: 1px solid rgba(0, 183, 255, 0.35);
+
+          box-shadow: 0 0 20px rgba(0, 140, 255, 0.15);
+        }
+
+        /* 隱藏完整模式 UI */
+
+        .system-label,
+        h1,
+        .input-group,
+        .unit,
+        #message,
+        .scan-line {
+          display: none;
+        }
+
+        /* Timer 變成主要顯示區 */
+
+        .timer {
+          margin: 0 0 12px;
+
+          padding: 12px 5px;
+
+          border: none;
+
+          background: transparent;
+        }
+
+        #secondsDisplay {
+          font-size: clamp(42px, 15vw, 70px);
+
+          letter-spacing: 3px;
+
+          white-space: nowrap;
+
+          word-break: normal;
+        }
+
+        /* 按鈕變小 */
+
+        .buttons {
+          width: 100%;
+
+          gap: 6px;
+        }
+
+        .buttons button {
+          flex: 1;
+
+          min-width: 0;
+
+          padding: 9px 5px;
+
+          font-size: 12px;
+
+          letter-spacing: 0;
+        }
+      }
+
+      /* ==================================================
+         EXTRA MINI MODE
+         
+         視窗非常小時
+         例如：
+         280 x 120
+      ================================================== */
+
+      @media (max-width: 320px) {
+        .timer-container {
+          padding: 8px;
+        }
+
+        .timer {
+          padding: 5px 0;
+
+          margin-bottom: 7px;
+        }
+
+        #secondsDisplay {
+          font-size: 38px;
+
+          letter-spacing: 1px;
+        }
+
+        .buttons {
+          gap: 4px;
+        }
+
+        .buttons button {
+          padding: 7px 3px;
+
+          font-size: 10px;
+        }
+      }
+
+      /* ==================================================
+         MOBILE
+      ================================================== */
 
       @media (max-width: 600px) {
         .timer-container {
@@ -539,12 +604,71 @@
 
         .buttons button {
           flex: 1;
+
           min-width: 90px;
         }
 
         #secondsDisplay {
           font-size: 58px;
+
           letter-spacing: 4px;
+        }
+      }
+
+      /* ==================================================
+         Important
+         
+         MINI MODE 必須放在 MOBILE 後面
+         
+         重新覆蓋 max-width: 420px 的設定
+      ================================================== */
+
+      @media (max-width: 420px) {
+        .timer-container {
+          width: 100%;
+
+          padding: 12px;
+        }
+
+        .system-label,
+        h1,
+        .input-group,
+        .unit,
+        #message,
+        .scan-line {
+          display: none;
+        }
+
+        .timer {
+          padding: 12px 5px;
+
+          margin-bottom: 12px;
+
+          border: none;
+        }
+
+        #secondsDisplay {
+          font-size: clamp(42px, 15vw, 70px);
+
+          letter-spacing: 3px;
+        }
+
+        .buttons {
+          display: flex;
+
+          flex-wrap: nowrap;
+
+          gap: 6px;
+        }
+
+        .buttons button {
+          flex: 1;
+
+          min-width: 0;
+
+          padding: 9px 5px;
+
+          font-size: 10px;
         }
       }
     </style>
@@ -552,17 +676,13 @@
 
   <body>
     <div class="timer-container">
-      <!-- Scan Animation -->
       <div class="scan-line"></div>
 
-      <!-- System Label -->
       <div class="system-label">SYSTEM // COUNTDOWN</div>
 
       <h1>Countdown Timer</h1>
 
-      <!-- ================================
-   Time Input
-  ================================= -->
+      <!-- Input -->
 
       <div class="input-group">
         <input id="timeInput" type="text" placeholder="Ex: 1:50" />
@@ -570,9 +690,7 @@
         <button class="convert-btn" onclick="convertTime()">Convert</button>
       </div>
 
-      <!-- ================================
-   Countdown Display
-  ================================= -->
+      <!-- Timer -->
 
       <div class="timer">
         <div id="secondsDisplay">0</div>
@@ -580,9 +698,7 @@
         <div class="unit">SECONDS</div>
       </div>
 
-      <!-- ================================
-   Control Buttons
-  ================================= -->
+      <!-- Buttons -->
 
       <div class="buttons">
         <button id="startBtn" onclick="startTimer()">START</button>
@@ -591,8 +707,6 @@
 
         <button id="resetBtn" onclick="resetTimer()">RESET</button>
       </div>
-
-      <!-- Message -->
 
       <div id="message"></div>
     </div>
@@ -611,18 +725,8 @@
       const message = document.getElementById("message");
 
       /* ================================
-   Convert Input Time to Seconds
-================================= */
-
-      /*
-   Format: Hours:Minutes
-
-   Example:
-   3:21
-   = 3 hours 21 minutes
-   = 201 minutes
-   = 12060 seconds
-*/
+         Convert Time
+      ================================= */
 
       function convertTime() {
         const input = timeInput.value.trim();
@@ -635,20 +739,14 @@
 
         let seconds = 0;
 
-        // Numbers only
-        // Example: 120
-        // Represents 120 minutes
+        /* Numbers only */
 
         if (/^\d+$/.test(input)) {
           const minutes = parseInt(input, 10);
 
           seconds = minutes * 60;
-        }
-
-        // Hours:Minutes
-        // Example: 3:21
-        // = 3 hours 21 minutes
-        else {
+        } else {
+          /* Hours : Minutes */
           const parts = input.split(":").map(Number);
 
           if (parts.length !== 2 || parts.some(isNaN)) {
@@ -661,19 +759,13 @@
 
           const minutes = parts[1];
 
-          // Minutes must be less than 60
-
           if (minutes >= 60) {
             message.textContent = "Minutes must be less than 60";
 
             return;
           }
 
-          // Convert to total minutes
-
           const totalMinutes = hours * 60 + minutes;
-
-          // Convert minutes to seconds
 
           seconds = totalMinutes * 60;
 
@@ -700,12 +792,10 @@
       }
 
       /* ================================
-   Start Countdown
-================================= */
+         Start Countdown
+      ================================= */
 
       function startTimer() {
-        // Prevent multiple timers from being created
-
         if (timer !== null) {
           return;
         }
@@ -723,8 +813,6 @@
 
           updateDisplay();
 
-          // Countdown completed
-
           if (remainingSeconds <= 0) {
             clearInterval(timer);
 
@@ -738,8 +826,8 @@
       }
 
       /* ================================
-   Pause
-================================= */
+         Pause
+      ================================= */
 
       function pauseTimer() {
         if (timer !== null) {
@@ -752,8 +840,8 @@
       }
 
       /* ================================
-   Reset
-================================= */
+         Reset
+      ================================= */
 
       function resetTimer() {
         clearInterval(timer);
@@ -768,34 +856,16 @@
       }
 
       /* ================================
-   Update Display
-================================= */
+         Update Display
+      ================================= */
 
       function updateDisplay() {
         secondsDisplay.textContent = remainingSeconds;
       }
 
       /* ================================
-   Convert Seconds to Time Format
-================================= */
-
-      function formatTime(seconds) {
-        const hours = Math.floor(seconds / 3600);
-
-        const minutes = Math.floor((seconds % 3600) / 60);
-
-        const secs = seconds % 60;
-
-        if (hours > 0) {
-          return `${hours} hours ${minutes} minutes ${secs} seconds`;
-        }
-
-        return `${minutes} minutes ${secs} seconds`;
-      }
-
-      /* ================================
-   Press Enter to Convert
-================================= */
+         Enter to Convert
+      ================================= */
 
       timeInput.addEventListener("keydown", function (event) {
         if (event.key === "Enter") {
