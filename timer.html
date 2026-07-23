@@ -1,0 +1,807 @@
+<!doctype html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Tech Countdown Timer</title>
+
+    <style>
+      /* ================================
+   Basic Settings
+================================= */
+
+      * {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg-color: #050a12;
+        --panel-color: rgba(10, 20, 35, 0.85);
+        --border-color: rgba(0, 174, 255, 0.35);
+        --primary-color: #00b7ff;
+        --primary-light: #69dcff;
+        --success-color: #00ff9d;
+        --warning-color: #ffc400;
+        --danger-color: #ff3864;
+        --text-color: #e8f7ff;
+        --sub-text-color: #6e91a8;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-family: "Segoe UI", Arial, sans-serif;
+
+        color: var(--text-color);
+
+        background:
+          radial-gradient(
+            circle at 50% 50%,
+            rgba(0, 140, 255, 0.08),
+            transparent 40%
+          ),
+          #050a12;
+
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ================================
+   Tech Background Grid
+================================= */
+
+      body::before {
+        content: "";
+
+        position: fixed;
+        inset: 0;
+
+        background-image:
+          linear-gradient(rgba(0, 174, 255, 0.04) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 174, 255, 0.04) 1px, transparent 1px);
+
+        background-size: 40px 40px;
+
+        mask-image: linear-gradient(
+          to bottom,
+          transparent,
+          black 20%,
+          black 80%,
+          transparent
+        );
+
+        pointer-events: none;
+      }
+
+      /* ================================
+   Background Glow
+================================= */
+
+      body::after {
+        content: "";
+
+        position: fixed;
+
+        width: 600px;
+        height: 600px;
+
+        background: rgba(0, 140, 255, 0.06);
+
+        filter: blur(100px);
+
+        pointer-events: none;
+      }
+
+      /* ================================
+   Main Container
+================================= */
+
+      .timer-container {
+        position: relative;
+
+        width: 90%;
+        max-width: 620px;
+
+        padding: 45px;
+
+        text-align: center;
+
+        background: linear-gradient(
+          145deg,
+          rgba(12, 28, 48, 0.95),
+          rgba(4, 12, 22, 0.95)
+        );
+
+        border: 1px solid var(--border-color);
+
+        box-shadow:
+          0 0 0 1px rgba(0, 174, 255, 0.05),
+          0 0 30px rgba(0, 140, 255, 0.12),
+          inset 0 0 30px rgba(0, 140, 255, 0.04);
+
+        overflow: hidden;
+      }
+
+      /* ================================
+   Tech Decoration Lines
+================================= */
+
+      .timer-container::before {
+        content: "";
+
+        position: absolute;
+
+        top: 0;
+        left: 10%;
+        right: 10%;
+
+        height: 1px;
+
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--primary-color),
+          transparent
+        );
+
+        box-shadow: 0 0 10px var(--primary-color);
+      }
+
+      .timer-container::after {
+        content: "";
+
+        position: absolute;
+
+        width: 80px;
+        height: 80px;
+
+        top: -40px;
+        right: -40px;
+
+        border: 1px solid rgba(0, 183, 255, 0.4);
+
+        transform: rotate(45deg);
+      }
+
+      /* ================================
+   System Label
+================================= */
+
+      .system-label {
+        margin-bottom: 10px;
+
+        font-size: 12px;
+
+        letter-spacing: 4px;
+
+        color: var(--primary-color);
+
+        text-shadow: 0 0 8px rgba(0, 183, 255, 0.8);
+      }
+
+      h1 {
+        margin: 0 0 35px;
+
+        font-size: 32px;
+
+        font-weight: 600;
+
+        letter-spacing: 3px;
+
+        color: #ffffff;
+
+        text-shadow: 0 0 10px rgba(0, 183, 255, 0.4);
+      }
+
+      /* ================================
+   Input Section
+================================= */
+
+      .input-group {
+        display: flex;
+
+        gap: 10px;
+
+        margin-bottom: 45px;
+      }
+
+      #timeInput {
+        flex: 1;
+
+        min-width: 0;
+
+        padding: 15px 20px;
+
+        font-size: 18px;
+
+        letter-spacing: 2px;
+
+        text-align: center;
+
+        color: var(--text-color);
+
+        background: rgba(0, 0, 0, 0.35);
+
+        border: 1px solid rgba(0, 183, 255, 0.3);
+
+        outline: none;
+
+        transition: all 0.3s ease;
+      }
+
+      #timeInput::placeholder {
+        color: #486579;
+      }
+
+      #timeInput:focus {
+        border-color: var(--primary-color);
+
+        box-shadow:
+          0 0 10px rgba(0, 183, 255, 0.25),
+          inset 0 0 10px rgba(0, 183, 255, 0.05);
+      }
+
+      /* ================================
+   Convert Button
+================================= */
+
+      .convert-btn {
+        padding: 0 24px;
+
+        border: 1px solid rgba(0, 183, 255, 0.5);
+
+        background: linear-gradient(
+          135deg,
+          rgba(0, 183, 255, 0.15),
+          rgba(0, 100, 200, 0.08)
+        );
+
+        color: var(--primary-light);
+
+        font-size: 15px;
+
+        letter-spacing: 1px;
+
+        cursor: pointer;
+
+        transition: all 0.3s ease;
+      }
+
+      .convert-btn:hover {
+        background: rgba(0, 183, 255, 0.2);
+
+        border-color: var(--primary-color);
+
+        box-shadow: 0 0 15px rgba(0, 183, 255, 0.35);
+
+        color: #ffffff;
+      }
+
+      /* ================================
+   Timer
+================================= */
+
+      .timer {
+        position: relative;
+
+        padding: 35px 20px;
+
+        margin-bottom: 35px;
+
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.2),
+          rgba(0, 183, 255, 0.03)
+        );
+
+        border-top: 1px solid rgba(0, 183, 255, 0.12);
+
+        border-bottom: 1px solid rgba(0, 183, 255, 0.12);
+      }
+
+      /* Corner Decorations */
+
+      .timer::before,
+      .timer::after {
+        content: "";
+
+        position: absolute;
+
+        width: 20px;
+        height: 20px;
+
+        border-color: var(--primary-color);
+
+        border-style: solid;
+      }
+
+      .timer::before {
+        top: 0;
+        left: 0;
+
+        border-width: 2px 0 0 2px;
+      }
+
+      .timer::after {
+        right: 0;
+        bottom: 0;
+
+        border-width: 0 2px 2px 0;
+      }
+
+      /* ================================
+   Seconds Display
+================================= */
+
+      #secondsDisplay {
+        font-family: "Courier New", monospace;
+
+        font-size: clamp(60px, 12vw, 100px);
+
+        font-weight: bold;
+
+        line-height: 1;
+
+        letter-spacing: 8px;
+
+        color: var(--primary-light);
+
+        text-shadow:
+          0 0 5px rgba(0, 183, 255, 0.8),
+          0 0 20px rgba(0, 183, 255, 0.5),
+          0 0 40px rgba(0, 183, 255, 0.25);
+
+        word-break: break-all;
+      }
+
+      .unit {
+        margin-top: 18px;
+
+        font-size: 13px;
+
+        letter-spacing: 5px;
+
+        color: var(--sub-text-color);
+
+        text-transform: uppercase;
+      }
+
+      /* ================================
+   Control Buttons
+================================= */
+
+      .buttons {
+        display: flex;
+
+        justify-content: center;
+
+        gap: 12px;
+      }
+
+      .buttons button {
+        min-width: 110px;
+
+        padding: 13px 20px;
+
+        border: 1px solid transparent;
+
+        font-size: 15px;
+
+        letter-spacing: 1px;
+
+        cursor: pointer;
+
+        transition:
+          transform 0.2s ease,
+          box-shadow 0.3s ease,
+          background 0.3s ease;
+      }
+
+      .buttons button:hover {
+        transform: translateY(-2px);
+      }
+
+      /* Start */
+
+      #startBtn {
+        background: rgba(0, 255, 157, 0.08);
+
+        border-color: rgba(0, 255, 157, 0.5);
+
+        color: var(--success-color);
+      }
+
+      #startBtn:hover {
+        background: rgba(0, 255, 157, 0.15);
+
+        box-shadow: 0 0 18px rgba(0, 255, 157, 0.3);
+      }
+
+      /* Pause */
+
+      #pauseBtn {
+        background: rgba(255, 196, 0, 0.08);
+
+        border-color: rgba(255, 196, 0, 0.5);
+
+        color: var(--warning-color);
+      }
+
+      #pauseBtn:hover {
+        background: rgba(255, 196, 0, 0.15);
+
+        box-shadow: 0 0 18px rgba(255, 196, 0, 0.3);
+      }
+
+      /* Reset */
+
+      #resetBtn {
+        background: rgba(255, 56, 100, 0.08);
+
+        border-color: rgba(255, 56, 100, 0.5);
+
+        color: var(--danger-color);
+      }
+
+      #resetBtn:hover {
+        background: rgba(255, 56, 100, 0.15);
+
+        box-shadow: 0 0 18px rgba(255, 56, 100, 0.3);
+      }
+
+      /* ================================
+   Message
+================================= */
+
+      #message {
+        height: 24px;
+
+        margin-top: 25px;
+
+        font-size: 13px;
+
+        letter-spacing: 1px;
+
+        color: var(--sub-text-color);
+
+        transition: color 0.3s ease;
+      }
+
+      /* ================================
+   Animated Scan Line
+================================= */
+
+      .scan-line {
+        position: absolute;
+
+        left: 0;
+        right: 0;
+
+        height: 1px;
+
+        background: rgba(0, 183, 255, 0.08);
+
+        animation: scan 5s linear infinite;
+
+        pointer-events: none;
+      }
+
+      @keyframes scan {
+        0% {
+          top: 0;
+          opacity: 0;
+        }
+
+        10% {
+          opacity: 1;
+        }
+
+        90% {
+          opacity: 1;
+        }
+
+        100% {
+          top: 100%;
+          opacity: 0;
+        }
+      }
+
+      /* ================================
+   Mobile
+================================= */
+
+      @media (max-width: 600px) {
+        .timer-container {
+          padding: 30px 20px;
+        }
+
+        h1 {
+          font-size: 25px;
+        }
+
+        .input-group {
+          flex-direction: column;
+        }
+
+        .convert-btn {
+          padding: 13px;
+        }
+
+        .buttons {
+          flex-wrap: wrap;
+        }
+
+        .buttons button {
+          flex: 1;
+          min-width: 90px;
+        }
+
+        #secondsDisplay {
+          font-size: 58px;
+          letter-spacing: 4px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="timer-container">
+      <!-- Scan Animation -->
+      <div class="scan-line"></div>
+
+      <!-- System Label -->
+      <div class="system-label">SYSTEM // COUNTDOWN</div>
+
+      <h1>Countdown Timer</h1>
+
+      <!-- ================================
+   Time Input
+  ================================= -->
+
+      <div class="input-group">
+        <input id="timeInput" type="text" placeholder="Ex: 1:50" />
+
+        <button class="convert-btn" onclick="convertTime()">Convert</button>
+      </div>
+
+      <!-- ================================
+   Countdown Display
+  ================================= -->
+
+      <div class="timer">
+        <div id="secondsDisplay">0</div>
+
+        <div class="unit">SECONDS</div>
+      </div>
+
+      <!-- ================================
+   Control Buttons
+  ================================= -->
+
+      <div class="buttons">
+        <button id="startBtn" onclick="startTimer()">START</button>
+
+        <button id="pauseBtn" onclick="pauseTimer()">PAUSE</button>
+
+        <button id="resetBtn" onclick="resetTimer()">RESET</button>
+      </div>
+
+      <!-- Message -->
+
+      <div id="message"></div>
+    </div>
+
+    <script>
+      let totalSeconds = 0;
+
+      let remainingSeconds = 0;
+
+      let timer = null;
+
+      const secondsDisplay = document.getElementById("secondsDisplay");
+
+      const timeInput = document.getElementById("timeInput");
+
+      const message = document.getElementById("message");
+
+      /* ================================
+   Convert Input Time to Seconds
+================================= */
+
+      /*
+   Format: Hours:Minutes
+
+   Example:
+   3:21
+   = 3 hours 21 minutes
+   = 201 minutes
+   = 12060 seconds
+*/
+
+      function convertTime() {
+        const input = timeInput.value.trim();
+
+        if (!input) {
+          message.textContent = "Please enter a time";
+
+          return;
+        }
+
+        let seconds = 0;
+
+        // Numbers only
+        // Example: 120
+        // Represents 120 minutes
+
+        if (/^\d+$/.test(input)) {
+          const minutes = parseInt(input, 10);
+
+          seconds = minutes * 60;
+        }
+
+        // Hours:Minutes
+        // Example: 3:21
+        // = 3 hours 21 minutes
+        else {
+          const parts = input.split(":").map(Number);
+
+          if (parts.length !== 2 || parts.some(isNaN)) {
+            message.textContent = "Invalid format, please enter HH:mm";
+
+            return;
+          }
+
+          const hours = parts[0];
+
+          const minutes = parts[1];
+
+          // Minutes must be less than 60
+
+          if (minutes >= 60) {
+            message.textContent = "Minutes must be less than 60";
+
+            return;
+          }
+
+          // Convert to total minutes
+
+          const totalMinutes = hours * 60 + minutes;
+
+          // Convert minutes to seconds
+
+          seconds = totalMinutes * 60;
+
+          totalSeconds = seconds;
+
+          remainingSeconds = seconds;
+
+          updateDisplay();
+
+          message.textContent = `${hours} hours ${minutes} minutes = ${totalMinutes} minutes × 60 = ${seconds} seconds`;
+
+          return;
+        }
+
+        totalSeconds = seconds;
+
+        remainingSeconds = seconds;
+
+        updateDisplay();
+
+        const totalMinutes = seconds / 60;
+
+        message.textContent = `${totalMinutes} minutes × 60 = ${seconds} seconds`;
+      }
+
+      /* ================================
+   Start Countdown
+================================= */
+
+      function startTimer() {
+        // Prevent multiple timers from being created
+
+        if (timer !== null) {
+          return;
+        }
+
+        if (remainingSeconds <= 0) {
+          message.textContent = "Please enter a time first";
+
+          return;
+        }
+
+        message.textContent = "COUNTDOWN ACTIVE";
+
+        timer = setInterval(() => {
+          remainingSeconds--;
+
+          updateDisplay();
+
+          // Countdown completed
+
+          if (remainingSeconds <= 0) {
+            clearInterval(timer);
+
+            timer = null;
+
+            remainingSeconds = 0;
+
+            message.textContent = "TIME COMPLETED";
+          }
+        }, 1000);
+      }
+
+      /* ================================
+   Pause
+================================= */
+
+      function pauseTimer() {
+        if (timer !== null) {
+          clearInterval(timer);
+
+          timer = null;
+
+          message.textContent = "COUNTDOWN PAUSED";
+        }
+      }
+
+      /* ================================
+   Reset
+================================= */
+
+      function resetTimer() {
+        clearInterval(timer);
+
+        timer = null;
+
+        remainingSeconds = totalSeconds;
+
+        updateDisplay();
+
+        message.textContent = "SYSTEM RESET";
+      }
+
+      /* ================================
+   Update Display
+================================= */
+
+      function updateDisplay() {
+        secondsDisplay.textContent = remainingSeconds;
+      }
+
+      /* ================================
+   Convert Seconds to Time Format
+================================= */
+
+      function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+
+        const minutes = Math.floor((seconds % 3600) / 60);
+
+        const secs = seconds % 60;
+
+        if (hours > 0) {
+          return `${hours} hours ${minutes} minutes ${secs} seconds`;
+        }
+
+        return `${minutes} minutes ${secs} seconds`;
+      }
+
+      /* ================================
+   Press Enter to Convert
+================================= */
+
+      timeInput.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          convertTime();
+        }
+      });
+    </script>
+  </body>
+</html>
