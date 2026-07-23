@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,8 +9,8 @@
 
     <style>
       /* ================================
-         Basic Settings
-      ================================= */
+     Basic Settings
+  ================================= */
 
       * {
         box-sizing: border-box;
@@ -19,18 +20,23 @@
         --bg-color: #050a12;
         --panel-color: rgba(10, 20, 35, 0.85);
         --border-color: rgba(0, 174, 255, 0.35);
+
+        /* Main Theme */
         --primary-color: #00b7ff;
         --primary-light: #69dcff;
+
+        /* Button Hover Colors */
         --success-color: #00ff9d;
         --warning-color: #ffc400;
         --danger-color: #ff3864;
+
         --text-color: #e8f7ff;
         --sub-text-color: #6e91a8;
       }
 
       /* ================================
-         Body
-      ================================= */
+     Body
+  ================================= */
 
       body {
         margin: 0;
@@ -60,8 +66,8 @@
       }
 
       /* ================================
-         Tech Background Grid
-      ================================= */
+     Tech Background Grid
+  ================================= */
 
       body::before {
         content: "";
@@ -88,8 +94,8 @@
       }
 
       /* ================================
-         Background Glow
-      ================================= */
+     Background Glow
+  ================================= */
 
       body::after {
         content: "";
@@ -107,8 +113,8 @@
       }
 
       /* ================================
-         Main Container
-      ================================= */
+     Main Container
+  ================================= */
 
       .timer-container {
         position: relative;
@@ -140,8 +146,8 @@
       }
 
       /* ================================
-         Top Decoration
-      ================================= */
+     Top Decoration
+  ================================= */
 
       .timer-container::before {
         content: "";
@@ -165,8 +171,8 @@
       }
 
       /* ================================
-         System Label
-      ================================= */
+     System Label
+  ================================= */
 
       .system-label {
         margin-bottom: 10px;
@@ -195,8 +201,8 @@
       }
 
       /* ================================
-         Input Section
-      ================================= */
+     Input Section
+  ================================= */
 
       .input-group {
         display: flex;
@@ -215,7 +221,7 @@
 
         font-size: 18px;
 
-        letter-spacing: 2px;
+        letter-spacing: 3px;
 
         text-align: center;
 
@@ -241,43 +247,13 @@
       }
 
       /* ================================
-         Convert Button
-      ================================= */
-
-      .convert-btn {
-        padding: 0 24px;
-
-        border: 1px solid rgba(0, 183, 255, 0.5);
-
-        background: rgba(0, 183, 255, 0.08);
-
-        color: var(--primary-light);
-
-        font-size: 15px;
-
-        letter-spacing: 1px;
-
-        cursor: pointer;
-      }
-
-      .convert-btn:hover {
-        background: rgba(0, 183, 255, 0.2);
-
-        border-color: var(--primary-color);
-
-        box-shadow: 0 0 15px rgba(0, 183, 255, 0.35);
-
-        color: #ffffff;
-      }
-
-      /* ================================
-         Timer
-      ================================= */
+     Timer
+  ================================= */
 
       .timer {
         position: relative;
 
-        padding: 35px 20px;
+        padding: 35px 20px 25px;
 
         margin-bottom: 35px;
 
@@ -293,8 +269,8 @@
       }
 
       /* ================================
-         Seconds Display
-      ================================= */
+     Seconds Display
+  ================================= */
 
       #secondsDisplay {
         font-family: "Courier New", monospace;
@@ -328,79 +304,336 @@
       }
 
       /* ================================
-         Control Buttons
-      ================================= */
+     Progress Bar
+  ================================= */
+
+      .progress-container {
+        width: 100%;
+
+        height: 8px;
+
+        margin-top: 25px;
+
+        overflow: hidden;
+
+        background: rgba(0, 0, 0, 0.5);
+
+        border: 1px solid rgba(0, 183, 255, 0.2);
+
+        box-shadow:
+          inset 0 0 8px rgba(0, 0, 0, 0.8),
+          0 0 8px rgba(0, 183, 255, 0.08);
+      }
+
+      .progress-bar {
+        width: 0%;
+
+        height: 100%;
+
+        background: linear-gradient(
+          90deg,
+          var(--primary-color),
+          var(--primary-light)
+        );
+
+        box-shadow:
+          0 0 8px rgba(0, 183, 255, 0.8),
+          0 0 18px rgba(0, 183, 255, 0.5);
+
+        transition:
+          width 0.5s linear,
+          background 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      /* ================================
+     Progress Warning
+  ================================= */
+
+      .progress-bar.warning {
+        background: linear-gradient(90deg, #ff9d00, var(--warning-color));
+
+        box-shadow:
+          0 0 8px rgba(255, 196, 0, 0.8),
+          0 0 18px rgba(255, 196, 0, 0.5);
+      }
+
+      .progress-bar.danger {
+        background: linear-gradient(90deg, #ff1744, var(--danger-color));
+
+        box-shadow:
+          0 0 8px rgba(255, 56, 100, 0.8),
+          0 0 18px rgba(255, 56, 100, 0.5);
+      }
+
+      /* ================================
+     Target Time
+  ================================= */
+
+      #targetTimeDisplay {
+        margin-top: 12px;
+
+        font-size: 12px;
+
+        letter-spacing: 2px;
+
+        color: var(--sub-text-color);
+      }
+
+      /* ================================
+     Tech Control Buttons
+  ================================= */
 
       .buttons {
         display: flex;
 
         justify-content: center;
 
-        gap: 12px;
+        align-items: center;
+
+        gap: 14px;
       }
 
-      .buttons button {
-        min-width: 110px;
+      /* ================================
+     Common Button
+     
+     Default:
+     統一白藍色主題
+  ================================= */
 
-        padding: 13px 20px;
+      .control-btn {
+        position: relative;
 
-        border: 1px solid transparent;
+        width: 72px;
+        height: 52px;
 
-        font-size: 15px;
+        display: flex;
 
-        letter-spacing: 1px;
+        justify-content: center;
+        align-items: center;
+
+        padding: 0;
+
+        border: none;
+
+        /* 預設統一白藍色 */
+        color: var(--primary-light);
+
+        background: rgba(0, 20, 35, 0.75);
 
         cursor: pointer;
 
+        overflow: hidden;
+
+        clip-path: polygon(
+          8px 0,
+          calc(100% - 8px) 0,
+          100% 8px,
+          100% calc(100% - 8px),
+          calc(100% - 8px) 100%,
+          8px 100%,
+          0 calc(100% - 8px),
+          0 8px
+        );
+
         transition:
           transform 0.2s ease,
+          background 0.3s ease,
           box-shadow 0.3s ease,
-          background 0.3s ease;
+          color 0.3s ease;
       }
 
-      .buttons button:hover {
+      /* ================================
+     Tech Border
+  ================================= */
+
+      .control-btn::before {
+        content: "";
+
+        position: absolute;
+
+        inset: 0;
+
+        padding: 1px;
+
+        background: currentColor;
+
+        opacity: 0.5;
+
+        clip-path: inherit;
+
+        pointer-events: none;
+      }
+
+      /* ================================
+     Inner Background
+  ================================= */
+
+      .control-btn::after {
+        content: "";
+
+        position: absolute;
+
+        inset: 2px;
+
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 40%),
+          rgba(5, 15, 25, 0.95);
+
+        clip-path: inherit;
+
+        z-index: 0;
+
+        transition:
+          background 0.3s ease,
+          opacity 0.3s ease;
+      }
+
+      /* ================================
+     Default Hover
+  ================================= */
+
+      .control-btn:hover {
         transform: translateY(-2px);
       }
 
+      .control-btn:hover::after {
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 45%),
+          rgba(5, 25, 40, 0.95);
+      }
+
       /* ================================
-         Start
-      ================================= */
+     Active
+  ================================= */
 
-      #startBtn {
-        background: rgba(0, 255, 157, 0.08);
+      .control-btn:active {
+        transform: translateY(0) scale(0.96);
+      }
 
-        border-color: rgba(0, 255, 157, 0.5);
+      /* ================================
+     Icon
+  ================================= */
 
+      .icon {
+        position: relative;
+
+        z-index: 2;
+
+        display: block;
+
+        filter: drop-shadow(0 0 5px currentColor);
+      }
+
+      /* ================================
+     Play Icon
+  ================================= */
+
+      .play-icon {
+        width: 0;
+        height: 0;
+
+        margin-left: 4px;
+
+        border-top: 9px solid transparent;
+        border-bottom: 9px solid transparent;
+        border-left: 14px solid currentColor;
+      }
+
+      /* ================================
+     Pause Icon
+  ================================= */
+
+      .pause-icon {
+        width: 14px;
+        height: 18px;
+
+        border-left: 4px solid currentColor;
+        border-right: 4px solid currentColor;
+      }
+
+      /* ================================
+     Reset Icon
+  ================================= */
+
+      .reset-icon {
+        font-family: Arial, sans-serif;
+
+        font-size: 28px;
+
+        font-weight: 300;
+
+        line-height: 1;
+
+        transform: translateY(-1px);
+      }
+
+      /* ==================================================
+     START BUTTON
+     
+     Default:
+     白藍色
+
+     Hover:
+     綠色
+  ================================================== */
+
+      #startBtn:hover {
         color: var(--success-color);
+
+        background: rgba(0, 255, 157, 0.12);
+
+        box-shadow:
+          0 0 8px rgba(0, 255, 157, 0.5),
+          0 0 20px rgba(0, 255, 157, 0.25),
+          inset 0 0 15px rgba(0, 255, 157, 0.08);
       }
 
-      /* ================================
-         Pause
-      ================================= */
+      /* ==================================================
+     PAUSE BUTTON
+     
+     Default:
+     白藍色
 
-      #pauseBtn {
-        background: rgba(255, 196, 0, 0.08);
+     Hover:
+     黃色
+  ================================================== */
 
-        border-color: rgba(255, 196, 0, 0.5);
-
+      #pauseBtn:hover {
         color: var(--warning-color);
+
+        background: rgba(255, 196, 0, 0.12);
+
+        box-shadow:
+          0 0 8px rgba(255, 196, 0, 0.5),
+          0 0 20px rgba(255, 196, 0, 0.25),
+          inset 0 0 15px rgba(255, 196, 0, 0.08);
       }
 
-      /* ================================
-         Reset
-      ================================= */
+      /* ==================================================
+     RESET BUTTON
+     
+     Default:
+     白藍色
 
-      #resetBtn {
-        background: rgba(255, 56, 100, 0.08);
+     Hover:
+     紅色
+  ================================================== */
 
-        border-color: rgba(255, 56, 100, 0.5);
-
+      #resetBtn:hover {
         color: var(--danger-color);
+
+        background: rgba(255, 56, 100, 0.12);
+
+        box-shadow:
+          0 0 8px rgba(255, 56, 100, 0.5),
+          0 0 20px rgba(255, 56, 100, 0.25),
+          inset 0 0 15px rgba(255, 56, 100, 0.08);
       }
 
       /* ================================
-         Message
-      ================================= */
+     Message
+  ================================= */
 
       #message {
         height: 24px;
@@ -415,8 +648,8 @@
       }
 
       /* ================================
-         Scan Line
-      ================================= */
+     Scan Line
+  ================================= */
 
       .scan-line {
         position: absolute;
@@ -454,18 +687,62 @@
       }
 
       /* ==================================================
-         MINI MODE
-         
-         當桌面 App 視窗寬度小於 420px
-         
-         隱藏：
-         - SYSTEM // COUNTDOWN
-         - Countdown Timer 標題
-         - 時間輸入
-         - Convert
-         - SECONDS
-         - Message
-      ================================================== */
+     MOBILE
+  ================================================== */
+
+      @media (max-width: 600px) {
+        .timer-container {
+          padding: 30px 20px;
+        }
+
+        h1 {
+          font-size: 25px;
+        }
+
+        .input-group {
+          flex-direction: column;
+        }
+
+        .buttons {
+          flex-wrap: wrap;
+        }
+
+        .control-btn {
+          width: 52px;
+          height: 52px;
+        }
+
+        .play-icon {
+          border-top-width: 9px;
+          border-bottom-width: 9px;
+          border-left-width: 14px;
+        }
+
+        .pause-icon {
+          width: 13px;
+          height: 18px;
+        }
+
+        .reset-icon {
+          font-size: 29px;
+        }
+
+        #secondsDisplay {
+          font-size: 58px;
+          letter-spacing: 4px;
+        }
+      }
+
+      /* ==================================================
+     MINI MODE
+     420px 以下
+     
+     三個按鈕：
+     - 長方形
+     - 平均寬度
+     - 預設白藍色
+     - Hover 才變成各自顏色
+  ================================================== */
 
       @media (max-width: 420px) {
         body {
@@ -478,6 +755,7 @@
 
         .timer-container {
           width: 100%;
+
           max-width: none;
 
           padding: 12px;
@@ -487,23 +765,24 @@
           box-shadow: 0 0 20px rgba(0, 140, 255, 0.15);
         }
 
-        /* 隱藏完整模式 UI */
+        /* 隱藏不需要的元素 */
 
         .system-label,
         h1,
         .input-group,
         .unit,
         #message,
+        #targetTimeDisplay,
         .scan-line {
           display: none;
         }
 
-        /* Timer 變成主要顯示區 */
+        /* Timer */
 
         .timer {
-          margin: 0 0 12px;
-
           padding: 12px 5px;
+
+          margin: 0 0 12px;
 
           border: none;
 
@@ -520,34 +799,176 @@
           word-break: normal;
         }
 
-        /* 按鈕變小 */
+        /* Progress Bar */
 
-        .buttons {
-          width: 100%;
+        .progress-container {
+          height: 5px;
 
-          gap: 6px;
+          margin-top: 15px;
         }
 
-        .buttons button {
-          flex: 1;
+        /* ================================
+       Buttons
+    ================================= */
+
+        .buttons {
+          display: flex;
+
+          flex-wrap: nowrap;
+
+          justify-content: stretch;
+
+          gap: 5px;
+
+          width: 100%;
+        }
+
+        /* ================================
+       Mini Control Buttons
+       
+       重要：
+       這裡直接覆蓋原本的八角形
+    ================================= */
+
+        .control-btn {
+          flex: 1 1 0;
+
+          width: 0;
 
           min-width: 0;
 
-          padding: 9px 5px;
+          height: 36px;
 
-          font-size: 12px;
+          padding: 0;
 
-          letter-spacing: 0;
+          /* 長方形 */
+          clip-path: none;
+
+          /* 白藍色主題 */
+          color: var(--primary-light);
+
+          background: rgba(0, 20, 35, 0.75);
+
+          /* 直接使用真正的 border */
+          border: 1px solid var(--primary-color);
+
+          border-radius: 0;
+
+          box-shadow:
+            0 0 5px rgba(0, 183, 255, 0.08),
+            inset 0 0 10px rgba(0, 183, 255, 0.03);
+        }
+
+        /* ================================
+       Mini Border
+       
+       關閉原本偽元素
+    ================================= */
+
+        .control-btn::before {
+          display: none;
+        }
+
+        /* ================================
+       Mini Inner Background
+    ================================= */
+
+        .control-btn::after {
+          inset: 0;
+
+          clip-path: none;
+
+          border-radius: 0;
+
+          background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 40%),
+            rgba(5, 15, 25, 0.95);
+        }
+
+        /* ================================
+       Mini Hover
+    ================================= */
+
+        #startBtn:hover {
+          color: var(--success-color);
+
+          border-color: var(--success-color);
+
+          background: rgba(0, 255, 157, 0.12);
+
+          box-shadow:
+            0 0 8px rgba(0, 255, 157, 0.5),
+            0 0 20px rgba(0, 255, 157, 0.25),
+            inset 0 0 15px rgba(0, 255, 157, 0.08);
+        }
+
+        #pauseBtn:hover {
+          color: var(--warning-color);
+
+          border-color: var(--warning-color);
+
+          background: rgba(255, 196, 0, 0.12);
+
+          box-shadow:
+            0 0 8px rgba(255, 196, 0, 0.5),
+            0 0 20px rgba(255, 196, 0, 0.25),
+            inset 0 0 15px rgba(255, 196, 0, 0.08);
+        }
+
+        #resetBtn:hover {
+          color: var(--danger-color);
+
+          border-color: var(--danger-color);
+
+          background: rgba(255, 56, 100, 0.12);
+
+          box-shadow:
+            0 0 8px rgba(255, 56, 100, 0.5),
+            0 0 20px rgba(255, 56, 100, 0.25),
+            inset 0 0 15px rgba(255, 56, 100, 0.08);
+        }
+
+        /* ================================
+       Mini Play Icon
+    ================================= */
+
+        .play-icon {
+          margin-left: 2px;
+
+          border-top-width: 6px;
+          border-bottom-width: 6px;
+          border-left-width: 9px;
+        }
+
+        /* ================================
+       Mini Pause Icon
+    ================================= */
+
+        .pause-icon {
+          width: 9px;
+
+          height: 13px;
+
+          border-left-width: 3px;
+
+          border-right-width: 3px;
+        }
+
+        /* ================================
+       Mini Reset Icon
+    ================================= */
+
+        .reset-icon {
+          font-size: 20px;
         }
       }
 
       /* ==================================================
-         EXTRA MINI MODE
-         
-         視窗非常小時
-         例如：
-         280 x 120
-      ================================================== */
+     EXTRA MINI MODE
+     320px 以下
+     
+     同樣保持長方形
+  ================================================== */
 
       @media (max-width: 320px) {
         .timer-container {
@@ -566,109 +987,112 @@
           letter-spacing: 1px;
         }
 
+        .progress-container {
+          height: 4px;
+
+          margin-top: 10px;
+        }
+
         .buttons {
           gap: 4px;
         }
 
-        .buttons button {
-          padding: 7px 3px;
+        /* ================================
+       320px 以下長方形按鈕
+    ================================= */
 
-          font-size: 10px;
-        }
-      }
+        .control-btn {
+          flex: 1 1 0;
 
-      /* ==================================================
-         MOBILE
-      ================================================== */
-
-      @media (max-width: 600px) {
-        .timer-container {
-          padding: 30px 20px;
-        }
-
-        h1 {
-          font-size: 25px;
-        }
-
-        .input-group {
-          flex-direction: column;
-        }
-
-        .convert-btn {
-          padding: 13px;
-        }
-
-        .buttons {
-          flex-wrap: wrap;
-        }
-
-        .buttons button {
-          flex: 1;
-
-          min-width: 90px;
-        }
-
-        #secondsDisplay {
-          font-size: 58px;
-
-          letter-spacing: 4px;
-        }
-      }
-
-      /* ==================================================
-         Important
-         
-         MINI MODE 必須放在 MOBILE 後面
-         
-         重新覆蓋 max-width: 420px 的設定
-      ================================================== */
-
-      @media (max-width: 420px) {
-        .timer-container {
-          width: 100%;
-
-          padding: 12px;
-        }
-
-        .system-label,
-        h1,
-        .input-group,
-        .unit,
-        #message,
-        .scan-line {
-          display: none;
-        }
-
-        .timer {
-          padding: 12px 5px;
-
-          margin-bottom: 12px;
-
-          border: none;
-        }
-
-        #secondsDisplay {
-          font-size: clamp(42px, 15vw, 70px);
-
-          letter-spacing: 3px;
-        }
-
-        .buttons {
-          display: flex;
-
-          flex-wrap: nowrap;
-
-          gap: 6px;
-        }
-
-        .buttons button {
-          flex: 1;
+          width: 0;
 
           min-width: 0;
 
-          padding: 9px 5px;
+          height: 32px;
 
-          font-size: 10px;
+          clip-path: none;
+
+          border: 1px solid var(--primary-color);
+
+          border-radius: 0;
+
+          color: var(--primary-light);
+
+          background: rgba(0, 20, 35, 0.75);
+        }
+
+        .control-btn::before {
+          display: none;
+        }
+
+        .control-btn::after {
+          inset: 0;
+
+          clip-path: none;
+
+          border-radius: 0;
+        }
+
+        /* ================================
+       320px Hover
+    ================================= */
+
+        #startBtn:hover {
+          color: var(--success-color);
+
+          border-color: var(--success-color);
+
+          background: rgba(0, 255, 157, 0.12);
+
+          box-shadow:
+            0 0 8px rgba(0, 255, 157, 0.5),
+            0 0 20px rgba(0, 255, 157, 0.25);
+        }
+
+        #pauseBtn:hover {
+          color: var(--warning-color);
+
+          border-color: var(--warning-color);
+
+          background: rgba(255, 196, 0, 0.12);
+
+          box-shadow:
+            0 0 8px rgba(255, 196, 0, 0.5),
+            0 0 20px rgba(255, 196, 0, 0.25);
+        }
+
+        #resetBtn:hover {
+          color: var(--danger-color);
+
+          border-color: var(--danger-color);
+
+          background: rgba(255, 56, 100, 0.12);
+
+          box-shadow:
+            0 0 8px rgba(255, 56, 100, 0.5),
+            0 0 20px rgba(255, 56, 100, 0.25);
+        }
+
+        .play-icon {
+          border-top-width: 5px;
+
+          border-bottom-width: 5px;
+
+          border-left-width: 8px;
+        }
+
+        .pause-icon {
+          width: 8px;
+
+          height: 11px;
+
+          border-left-width: 2px;
+
+          border-right-width: 2px;
+        }
+
+        .reset-icon {
+          font-size: 18px;
         }
       }
     </style>
@@ -682,12 +1106,18 @@
 
       <h1>Countdown Timer</h1>
 
-      <!-- Input -->
+      <!-- Target Time Input -->
 
       <div class="input-group">
-        <input id="timeInput" type="text" placeholder="Ex: 1:50" />
-
-        <button class="convert-btn" onclick="convertTime()">Convert</button>
+        <input
+          id="timeInput"
+          type="text"
+          inputmode="numeric"
+          maxlength="4"
+          placeholder="HHMM"
+          aria-label="Target time"
+          autocomplete="off"
+        />
       </div>
 
       <!-- Timer -->
@@ -695,28 +1125,66 @@
       <div class="timer">
         <div id="secondsDisplay">0</div>
 
-        <div class="unit">SECONDS</div>
+        <div class="unit">SECONDS REMAINING</div>
+
+        <!-- Progress Bar -->
+
+        <div class="progress-container">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div id="targetTimeDisplay">TARGET TIME: --</div>
       </div>
 
       <!-- Buttons -->
 
       <div class="buttons">
-        <button id="startBtn" onclick="startTimer()">START</button>
+        <button
+          id="startBtn"
+          class="control-btn"
+          onclick="startTimer()"
+          aria-label="Start"
+          title="Start"
+        >
+          <span class="icon play-icon"></span>
+        </button>
 
-        <button id="pauseBtn" onclick="pauseTimer()">PAUSE</button>
+        <button
+          id="pauseBtn"
+          class="control-btn"
+          onclick="pauseTimer()"
+          aria-label="Pause"
+          title="Pause"
+        >
+          <span class="icon pause-icon"></span>
+        </button>
 
-        <button id="resetBtn" onclick="resetTimer()">RESET</button>
+        <button
+          id="resetBtn"
+          class="control-btn"
+          onclick="resetTimer()"
+          aria-label="Reset"
+          title="Reset"
+        >
+          <span class="icon reset-icon">↻</span>
+        </button>
       </div>
 
       <div id="message"></div>
     </div>
 
     <script>
+      /* ================================
+     Variables
+  ================================= */
+
       let totalSeconds = 0;
 
       let remainingSeconds = 0;
 
       let timer = null;
+
+      let targetTime = null;
 
       const secondsDisplay = document.getElementById("secondsDisplay");
 
@@ -724,94 +1192,168 @@
 
       const message = document.getElementById("message");
 
+      const progressBar = document.getElementById("progressBar");
+
+      const targetTimeDisplay = document.getElementById("targetTimeDisplay");
+
       /* ================================
-         Convert Time
-      ================================= */
+     Format Time AM / PM
+  ================================= */
 
-      function convertTime() {
-        const input = timeInput.value.trim();
+      function formatTimeAMPM(timeValue) {
+        const hours = Number(timeValue.substring(0, 2));
 
-        if (!input) {
-          message.textContent = "Please enter a time";
+        const minutes = Number(timeValue.substring(2, 4));
 
-          return;
-        }
+        const period = hours >= 12 ? "PM" : "AM";
 
-        let seconds = 0;
+        const displayHours = hours % 12 || 12;
 
-        /* Numbers only */
-
-        if (/^\d+$/.test(input)) {
-          const minutes = parseInt(input, 10);
-
-          seconds = minutes * 60;
-        } else {
-          /* Hours : Minutes */
-          const parts = input.split(":").map(Number);
-
-          if (parts.length !== 2 || parts.some(isNaN)) {
-            message.textContent = "Invalid format, please enter HH:mm";
-
-            return;
-          }
-
-          const hours = parts[0];
-
-          const minutes = parts[1];
-
-          if (minutes >= 60) {
-            message.textContent = "Minutes must be less than 60";
-
-            return;
-          }
-
-          const totalMinutes = hours * 60 + minutes;
-
-          seconds = totalMinutes * 60;
-
-          totalSeconds = seconds;
-
-          remainingSeconds = seconds;
-
-          updateDisplay();
-
-          message.textContent = `${hours} hours ${minutes} minutes = ${totalMinutes} minutes × 60 = ${seconds} seconds`;
-
-          return;
-        }
-
-        totalSeconds = seconds;
-
-        remainingSeconds = seconds;
-
-        updateDisplay();
-
-        const totalMinutes = seconds / 60;
-
-        message.textContent = `${totalMinutes} minutes × 60 = ${seconds} seconds`;
+        return `${displayHours}:${String(minutes).padStart(2, "0")} ${period}`;
       }
 
       /* ================================
-         Start Countdown
-      ================================= */
+     Validate Time
+  ================================= */
+
+      function isValidTime(timeValue) {
+        if (!/^\d{4}$/.test(timeValue)) {
+          return false;
+        }
+
+        const hours = Number(timeValue.substring(0, 2));
+
+        const minutes = Number(timeValue.substring(2, 4));
+
+        return hours >= 0 && hours <= 23 && minutes >= 0 && minutes <= 59;
+      }
+
+      /* ================================
+     Get Target Time
+  ================================= */
+
+      function getTargetDate(timeValue) {
+        const hours = Number(timeValue.substring(0, 2));
+
+        const minutes = Number(timeValue.substring(2, 4));
+
+        const now = new Date();
+
+        const target = new Date();
+
+        target.setHours(hours);
+
+        target.setMinutes(minutes);
+
+        target.setSeconds(0);
+
+        target.setMilliseconds(0);
+
+        /*
+      如果輸入的時間已經過了今天，
+      就設定為明天同一時間
+    */
+
+        if (target <= now) {
+          target.setDate(target.getDate() + 1);
+        }
+
+        return target;
+      }
+
+      /* ================================
+     Start Countdown
+  ================================= */
 
       function startTimer() {
+        /*
+      已經在倒數時，
+      不重複啟動
+    */
+
         if (timer !== null) {
           return;
         }
 
+        const timeValue = timeInput.value.trim();
+
+        /*
+      如果沒有輸入時間
+    */
+
+        if (!timeValue) {
+          message.textContent = "PLEASE ENTER TARGET TIME";
+
+          return;
+        }
+
+        /*
+      驗證時間格式
+    */
+
+        if (!isValidTime(timeValue)) {
+          message.textContent = "INVALID TIME - USE HHMM";
+
+          return;
+        }
+
+        /*
+      第一次 START
+      或 RESET 後重新開始
+    */
+
+        if (!targetTime) {
+          targetTime = getTargetDate(timeValue);
+
+          const now = new Date();
+
+          totalSeconds = Math.max(
+            0,
+            Math.floor((targetTime.getTime() - now.getTime()) / 1000),
+          );
+
+          remainingSeconds = totalSeconds;
+
+          targetTimeDisplay.textContent = `TARGET TIME: ${formatTimeAMPM(timeValue)}`;
+
+          updateDisplay();
+        }
+
+        /*
+      如果時間已經到了
+    */
+
         if (remainingSeconds <= 0) {
-          message.textContent = "Please enter a time first";
+          message.textContent = "TIME COMPLETED";
 
           return;
         }
 
         message.textContent = "COUNTDOWN ACTIVE";
 
+        /*
+      開始倒數
+    */
+
         timer = setInterval(() => {
-          remainingSeconds--;
+          const now = new Date();
+
+          /*
+        直接計算目前距離目標時間
+
+        避免 setInterval 延遲造成誤差
+      */
+
+          remainingSeconds = Math.max(
+            0,
+            Math.ceil((targetTime.getTime() - now.getTime()) / 1000),
+          );
 
           updateDisplay();
+
+          /*
+        倒數結束
+      */
 
           if (remainingSeconds <= 0) {
             clearInterval(timer);
@@ -820,14 +1362,18 @@
 
             remainingSeconds = 0;
 
+            updateDisplay();
+
             message.textContent = "TIME COMPLETED";
+
+            return;
           }
         }, 1000);
       }
 
       /* ================================
-         Pause
-      ================================= */
+     Pause
+  ================================= */
 
       function pauseTimer() {
         if (timer !== null) {
@@ -835,41 +1381,170 @@
 
           timer = null;
 
+          /*
+        保留 targetTime
+
+        之後按 START
+        可以繼續倒數
+      */
+
           message.textContent = "COUNTDOWN PAUSED";
         }
       }
 
       /* ================================
-         Reset
-      ================================= */
+     Reset
+  ================================= */
 
       function resetTimer() {
         clearInterval(timer);
 
         timer = null;
 
-        remainingSeconds = totalSeconds;
+        targetTime = null;
 
-        updateDisplay();
+        totalSeconds = 0;
+
+        remainingSeconds = 0;
+
+        /*
+      清除進度條狀態
+    */
+
+        progressBar.classList.remove("warning", "danger");
+
+        progressBar.style.width = "0%";
+
+        /*
+      重設顯示
+    */
+
+        secondsDisplay.textContent = "0";
+
+        targetTimeDisplay.textContent = "TARGET TIME: --";
 
         message.textContent = "SYSTEM RESET";
       }
 
       /* ================================
-         Update Display
-      ================================= */
+     Update Display
+  ================================= */
 
       function updateDisplay() {
+        /*
+      更新秒數
+    */
+
         secondsDisplay.textContent = remainingSeconds;
+
+        /*
+      計算進度百分比
+    */
+
+        let progress = 0;
+
+        if (totalSeconds > 0) {
+          progress = (remainingSeconds / totalSeconds) * 100;
+        }
+
+        /*
+      限制在 0 ~ 100%
+    */
+
+        progress = Math.max(0, Math.min(100, progress));
+
+        /*
+      先移除舊狀態
+    */
+
+        progressBar.classList.remove("warning", "danger");
+
+        /*
+      10% 以下 → 紅色
+    */
+
+        if (progress <= 10) {
+          progressBar.classList.add("danger");
+        } else if (progress <= 30) {
+          /*
+        30% 以下 → 黃色
+      */
+
+          progressBar.classList.add("warning");
+        }
+
+        /*
+      更新進度寬度
+    */
+
+        progressBar.style.width = `${progress}%`;
       }
 
       /* ================================
-         Enter to Convert
-      ================================= */
+     Time Input
+  ================================= */
 
-      timeInput.addEventListener("keydown", function (event) {
-        if (event.key === "Enter") {
-          convertTime();
+      timeInput.addEventListener("input", function () {
+        /*
+      只保留數字
+    */
+
+        this.value = this.value.replace(/\D/g, "");
+
+        /*
+      限制最多 4 位
+    */
+
+        this.value = this.value.substring(0, 4);
+
+        /*
+      輸入完整 4 位數字後，
+      顯示時間
+    */
+
+        if (this.value.length === 4) {
+          if (isValidTime(this.value)) {
+            /*
+          如果目前正在倒數，
+          先停止
+        */
+
+            clearInterval(timer);
+
+            timer = null;
+
+            targetTime = null;
+
+            totalSeconds = 0;
+
+            remainingSeconds = 0;
+
+            progressBar.classList.remove("warning", "danger");
+
+            progressBar.style.width = "0%";
+
+            secondsDisplay.textContent = "0";
+
+            /*
+          顯示 AM / PM
+        */
+
+            targetTimeDisplay.textContent = `TARGET TIME: ${formatTimeAMPM(this.value)}`;
+
+            message.textContent = "TARGET TIME SET";
+          } else {
+            targetTimeDisplay.textContent = "TARGET TIME: --";
+
+            message.textContent = "INVALID TIME - USE HHMM";
+          }
+        } else {
+          /*
+        尚未輸入完整時間
+      */
+
+          targetTimeDisplay.textContent = "TARGET TIME: --";
+
+          message.textContent = "";
         }
       });
     </script>
